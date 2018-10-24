@@ -1,6 +1,6 @@
-var player1Position, player2Position;
-var player1Velocity, player2Velocity;
-var ball;
+let player1Position, player2Position;
+let player1Velocity, player2Velocity;
+let ball;
 const PADDLE_WIDTH = 10;
 const PADDLE_HEIGHT = 100;
 const BALL_RADIUS = 20;
