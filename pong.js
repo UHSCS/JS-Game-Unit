@@ -1,9 +1,12 @@
-let player1Position, player2Position;
-let player1Velocity, player2Velocity;
-let ball;
+const INITIAL_BALL_SPEED = 3;
+var player1Position, player2Position;
+var player1Velocity, player2Velocity;
+var ball;
 const PADDLE_WIDTH = 10;
 const PADDLE_HEIGHT = 100;
 const BALL_RADIUS = 20;
+var ball, ballVelocity;
+
 
 function setup() {
    createCanvas(600, 400);
@@ -12,7 +15,9 @@ function setup() {
   player1Velocity = player2Velocity = 0;
    // initialize player position to mid screen
    ball = createVector(width / 2, height / 2); // initialize ball in the middle
-
+  
+   ballVelocity = createVector(random(-1, 1), random(-1, 1)); // give the ball a random trajectory
+   ballVelocity.setMag(INITIAL_BALL_SPEED); // set the speed to 3
 }
 
 function draw() {
@@ -23,11 +28,23 @@ function draw() {
   ellipse(ball.x, ball.y, BALL_RADIUS);
   
   handlePaddles();
+  handleBall();
 }
+
+function handleBall() {
+
+  ball.x += ballVelocity.x;
+  ball.y += ballVelocity.y;
+
+  /* top & bottom collisions */
+  if (ball.y > height || ball.y < 0)
+    ballVelocity.y *= -1; // reverse y-velocity
+
+ }
 
 function handlePaddles() {
 
-  /* player one controls */ 
+  /* player one controls */
   if (keyIsDown(87)) {
     /* move up */
 
