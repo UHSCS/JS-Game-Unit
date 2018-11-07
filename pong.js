@@ -49,12 +49,8 @@ function handleBall() {
 
     // check collision on left paddle
     if (ball.y > player1Position && ball.y < player1Position + PADDLE_HEIGHT) {
-
-      //if (ballVelocity.x < 0) { // prevent the ball from getting stuck inside paddle
-
         ballVelocity.x *= -1;
         ballVelocity.mult(random(1, 1.1));
-      //}
     }
 
   } else if (ball.x >= width - (PADDLE_WIDTH * 3)) { // within range of right side 
