@@ -60,17 +60,13 @@ function handleBall() {
   } else if (ball.x >= width - (PADDLE_WIDTH * 3)) { // within range of right side 
 
     if (ball.x >= width - PADDLE_WIDTH) { // out of bounds
-//reset(); 
       return;
     }
 
     // check collision on right paddle
     if (ball.y > player2Position && ball.y < player2Position + PADDLE_HEIGHT) {
-
-      //if (ballVelocity.x > 0) { // prevent the ball from getting stuck inside paddle
         ballVelocity.x *= -1;
         ballVelocity.mult(random(1, 1.1));
-      //}
     }
   }
  }
