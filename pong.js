@@ -39,7 +39,40 @@ function handleBall() {
   /* top & bottom collisions */
   if (ball.y > height || ball.y < 0)
     ballVelocity.y *= -1; // reverse y-velocity
+  
+    /* paddle collisions */
+  if (ball.x <= PADDLE_WIDTH * 3) { // within range on the left side (just about to pass paddle)
 
+    if (ball.x <= PADDLE_WIDTH) { // out of bounds
+      return; //terminates function
+    }
+
+    // check collision on left paddle
+    if (ball.y > player1Position && ball.y < player1Position + PADDLE_HEIGHT) {
+
+      //if (ballVelocity.x < 0) { // prevent the ball from getting stuck inside paddle
+
+        ballVelocity.x *= -1;
+        ballVelocity.mult(random(1, 1.1));
+      //}
+    }
+
+  } else if (ball.x >= width - (PADDLE_WIDTH * 3)) { // within range of right side 
+
+    if (ball.x >= width - PADDLE_WIDTH) { // out of bounds
+//reset(); 
+      return;
+    }
+
+    // check collision on right paddle
+    if (ball.y > player2Position && ball.y < player2Position + PADDLE_HEIGHT) {
+
+      //if (ballVelocity.x > 0) { // prevent the ball from getting stuck inside paddle
+        ballVelocity.x *= -1;
+        ballVelocity.mult(random(1, 1.1));
+      //}
+    }
+  }
  }
 
 function handlePaddles() {
