@@ -1,12 +1,9 @@
 function setup() {
-  
+     
   //mandatory lines
-  noStroke()
+ 
   createCanvas(1000, 800);
   
-  //basic game vars
-  live = true
-  points = 0
   
   //Snake array, organized by center x and y coords of each square
   snake = [500, 340,
@@ -15,15 +12,10 @@ function setup() {
            500, 460,
            500, 500,
            500, 540]
-
-  //apple
-  apple_pos = [500, 180]
-  
 }
 
 function draw() {
-  
-  //background 
+    //background 
   background(240,240,240);
   
   //lattice lines
@@ -34,4 +26,16 @@ function draw() {
   for(i = 0; i < 800; i += 40){
   	rect(0, i-1, 1000, 2)
   }  
+	
+	  //body
+  fill(150,150,150)
+  for(i = snake.length; i > 0; i -= 2){
+  	rect(snake[i]-20, snake[i+1]-20, 40, 40)
+  }
+
+snake.pop()
+snake.pop()
+snake.unshift(snake[0], snake[1]-40)
+
+
 }
