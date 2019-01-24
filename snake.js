@@ -10,10 +10,15 @@ function setup() {
            500, 460,
            500, 500,
            500, 540]
+  
+  apple_pos = [500, 180]
 
   //control variables
   dir = "up"
 	move_tick = 10
+  add_seg = false
+  live = true
+
 
 }
 	
@@ -50,6 +55,11 @@ function draw() {
   	rect(0, i-1, 1000, 2)
   }  
   
+  fill(255,0,0)
+ rect(apple_pos[0]-20, apple_pos[1]-20, 40, 40) 
+
+
+  
   //snake graphics
   fill(150,150,150)
   for(i = snake.length; i > 0; i -= 2){
@@ -59,9 +69,28 @@ function draw() {
   //snake movement  
   if(move_tick == 10){
     	
-    //always delete the last two positions 		
-    snake.pop()
-    snake.pop() 
+    //always delete the last two positions 
+    if (add_seg == false){
+
+      snake.pop()
+      snake.pop() 
+    }
+    add_seg = false
+    
+    if(snake[0] == -20){
+    live = false  
+  }else if(snake[0] == 1020){
+    live = false  
+  }
+
+    
+    if(snake[1] == -20){
+    live = false  
+  }else if(snake[1] == 820){
+    live = false  
+  }
+
+
     
     //movement, link dir variable to snake array
     if(dir == "up"){
@@ -75,6 +104,12 @@ function draw() {
 			snake.unshift(snake[0]-40, snake[1])
     }
   }
+  
+  if(snake[0] == apple_pos[0] && snake[1] == apple_pos[1]) {
+	apple_pos = [round(random(0,24))*40 + 20, round(random(0,19))*40 + 20]  
+	add_seg = true
+  }
+
 
   //tick snake movement
   move_tick --;
@@ -83,7 +118,3 @@ function draw() {
   }
 
 }
-
-
-
-
